@@ -13,6 +13,9 @@ import { CheckSubscriptionController } from "./controllers/haircut/CheckSubscrip
 import { CreateScheduleController } from "./controllers/schedule/CreateScheduleController";
 import { ListScheduleController } from "./controllers/schedule/ListScheduleController";
 import { FinishScheduleController } from "./controllers/schedule/FinishScheduleController";
+import { SubscribeController } from "./controllers/subscription/SubscribeController";
+import { WeebhookController } from "./controllers/subscription/WebhookControler";
+import { CreatePortalController } from "./controllers/subscription/CreatePortalController";
 
 const router = Router();
 
@@ -53,6 +56,15 @@ router.delete(
   "/schedule/finish",
   isAuthenticated,
   new FinishScheduleController().handle
+);
+
+//Rotas pagamentos
+router.post("/subscribe", isAuthenticated, new SubscribeController().handle);
+router.post("/webhooks", new WeebhookController().handle);
+router.post(
+  "/create-portal",
+  isAuthenticated,
+  new CreatePortalController().handle
 );
 
 export { router };
